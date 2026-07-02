@@ -8,7 +8,7 @@ MINOR_VERSION := 24.3.1.5
 .PHONY: build release release_latest
 
 build:
-	docker image build -t $(NAME):$(VERSION) -t $(NAME):$(MINOR_VERSION) -t $(NAME):latest .
+	docker image build --platform=linux/amd64 -t $(NAME):$(VERSION) -t $(NAME):$(MINOR_VERSION) -t $(NAME):latest .
 
 release: build
 	docker image push $(NAME):$(VERSION)
