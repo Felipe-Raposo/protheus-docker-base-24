@@ -1,7 +1,7 @@
 export DOCKER_BUILDKIT := 1
 
 IMAGE_REPO := feliperaposo
-NAME := $(IMAGE_REPO)/protheus-base
+NAME := $(IMAGE_REPO)/protheus-docker-base
 VERSION := 24
 MINOR_VERSION := 24.3.1.5
 
