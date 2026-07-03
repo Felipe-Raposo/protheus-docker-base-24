@@ -16,13 +16,7 @@ if [[ -f "/protheus12/bin/appserver.tar.xz" ]]; then
 	rm appserver.tar.xz
 fi
 
-# Configura e inicia serviço do Protheus.
-cd /protheus12/bin/appserver/
-sed 's/{{APPSERVER_DATABASE}}/'"${APPSERVER_DATABASE}"'/' -i ./appserver.ini
-echo "Inicializando Protheus AppServer $(./appsrvlinux --version) ${APPSERVER_DATABASE}"
-./appsrvlinux
-
-# Verifica limites de /proc/sys/fs/file-max.
+# Verifica limites de /proc/sys/fs/file-max antes de subir o serviço.
 FILE_MAX=$( cat /proc/sys/fs/file-max )
 printf -- '-%.0s' {1..69}; printf '\n'
 echo "Valor atual de /proc/sys/fs/file-max: $FILE_MAX"
@@ -34,3 +28,10 @@ elif [[ $FILE_MAX -lt 65536 ]]; then
 	echo "# echo 65536 > /proc/sys/fs/file-max"
 fi
 printf -- '-%.0s' {1..69}; printf '\n'
+
+# Configura e inicia serviço do Protheus.
+cd /protheus12/bin/appserver/
+sed 's/{{APPSERVER_DATABASE}}/'"${APPSERVER_DATABASE}"'/' -i ./appserver.ini
+echo "Inicializando Protheus AppServer $(./appsrvlinux --version) ${APPSERVER_DATABASE}"
+# exec: appsrvlinux assume o PID 1 e recebe SIGTERM do "docker stop" (shutdown gracioso).
+exec ./appsrvlinux

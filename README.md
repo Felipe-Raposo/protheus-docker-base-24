@@ -39,9 +39,9 @@ make release_latest
 
 Gera as tags:
 
-- `feliperaposo/protheus-base:24`
-- `feliperaposo/protheus-base:24.x.y.z`
-- `feliperaposo/protheus-base:latest`
+- `feliperaposo/protheus-docker-base:24`
+- `feliperaposo/protheus-docker-base:24.3.1.5`
+- `feliperaposo/protheus-docker-base:latest`
 
 ## Estrutura interna (referência)
 
