@@ -4,13 +4,13 @@ Imagem Docker base para execução do **TOTVS Protheus 12** (AppServer) em ambie
 
 ## Descrição
 
-Este projeto monta uma imagem base Docker para rodar o AppServer do Protheus 12 sobre Oracle Linux 9. A imagem estende [protheus-docker-baselight:24](https://hub.docker.com/r/feliperaposo/protheus-docker-baselight) com configuração padrão, SmartClient WebApp e Web Agent.
+Este projeto monta a imagem `feliperaposo/protheus-docker-base:24`, usada pelo License Server e pelo Protheus 12.1.2510. Ela estende [protheus-docker-baselight:24](https://github.com/Felipe-Raposo/protheus-docker-baselight-24) com `appserver.ini`, SmartClient WebApp e Web Agent.
 
-Esse projeto gera imagem base para a construção de imagens de AppServer para License e para Protheus 12.1.2410 ou 12.1.2510.
+Se estiver buscando um ambiente completo com Protheus + License + dbAccess + Postgres, acesse esse [projeto](https://github.com/Felipe-Raposo/protheus-docker-compose).
 
 ### Características
 
-- **Base:** `feliperaposo/protheus-docker-baselight:24` (Oracle Linux 9 Slim + AppServer 24.x.y.z)
+- **Base:** `feliperaposo/protheus-docker-baselight:24` (Oracle Linux 9 Slim + AppServer 24.3.1.9)
 - **Protheus:** AppServer (porta TCP 1234)
 - **DBAPI:** `dbapi.so` baixado de `http://dbaccess:7891/dbapi.so` para `/protheus12/bin/appserver/` na inicialização, quando o `appserver.ini` tem `[DBAccess]` (`DBAPI_URL` substitui a URL)
 - **Printer:** `printer` em `/protheus12/bin/appserver/`
@@ -23,6 +23,7 @@ Esse projeto gera imagem base para a construção de imagens de AppServer para L
 ## Pré-requisitos
 
 - Docker (com BuildKit habilitado para build)
+- Host de build `linux/amd64` (`make build` passa `--platform=linux/amd64`)
 - Imagem `feliperaposo/protheus-docker-baselight:24` disponível localmente ou no registry
 
 ## Build
